@@ -1,0 +1,7 @@
+#Ranking salary for each department (no ties)
+
+SELECT de.dept_no, de.emp_no, salary, 
+		ROW_NUMBER() OVER(PARTITION BY dept_no ORDER BY salary, de.from_date DESC) AS row_rank FROM dept_emp de
+JOIN salaries s ON de.emp_no=s.emp_no
+JOIN departments d ON d.dept_no=de.dept_no
+
